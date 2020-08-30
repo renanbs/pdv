@@ -1,5 +1,5 @@
 from pdv.api.app import initialize
-from pdv.main_module import MODULES
+from pdv.config.main_module import MODULES
 
 application = initialize(modules=MODULES)
 
