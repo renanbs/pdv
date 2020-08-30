@@ -4,7 +4,7 @@ from flask import Blueprint, jsonify
 
 from injector import inject
 
-from pdv.dependencies import Application
+from pdv.config.dependencies import Application
 
 
 class TransactionsEndpoint:

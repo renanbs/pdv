@@ -1,6 +1,6 @@
 from injector import Injector
 
-from pdv.app_module import AppModule
+from pdv.config.app_module import AppModule
 
 MODULES = [AppModule]
 

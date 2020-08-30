@@ -2,9 +2,9 @@ from flask import Flask
 from injector import Injector
 
 
-from pdv.default import Config
-from pdv.dependencies import ApplicationRegister, Application
-from pdv.main_module import MODULES, create_injector
+from pdv.config.default import Config
+from pdv.config.dependencies import ApplicationRegister, Application
+from pdv.config.main_module import MODULES, create_injector
 
 
 def create_app(injector: Injector) -> Flask:
