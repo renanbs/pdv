@@ -8,15 +8,15 @@ from pdv.config.dependencies import Application
 
 
 from pdv.domain.establishment_service import EstablishmentService
-from pdv.domain.transaction_interface import TransactionInterface
+from pdv.domain.transaction_service import TransactionService
 
 
 class EstablishmentsEndpoint:
 
     @inject
-    def __init__(self, app: Application, ec: EstablishmentService, transaction_service: TransactionInterface):
+    def __init__(self, app: Application, ec_service: EstablishmentService, transaction_service: TransactionService):
         self.app = app
-        self.ec = ec
+        self.ec_service = ec_service
         self.transaction_service = transaction_service
 
     def register_endpoints(self):
@@ -24,8 +24,8 @@ class EstablishmentsEndpoint:
 
         @self.app.route('/api/v1/estabelecimento', methods=['POST'])
         def add_establishments():
-            self.ec.save('my ec')
-            self.transaction_service.create_transaction('my transaction')
+            self.ec_service.create_establishment('my ec 2')
+            self.transaction_service.create_transaction('my transaction 2')
 
             return jsonify({'aceito': True}), HTTPStatus.CREATED
 

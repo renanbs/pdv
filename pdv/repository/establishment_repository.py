@@ -10,7 +10,7 @@ class EstablishmentRepository(EstablishmentInterface):
     def __init__(self, session: Session):
         self.session = session
 
-    def create_establishment(self, name: str) -> None:
+    def save(self, name: str) -> None:
         ec = Establishment(name=name)
         self.session.add(ec)
         self.session.commit()

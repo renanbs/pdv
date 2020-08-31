@@ -8,5 +8,5 @@ class EstablishmentService:
     def __init__(self, repository: EstablishmentRepository):
         self.repository = repository
 
-    def save(self, name: str):
-        self.repository.create_establishment(name)
+    def create_establishment(self, name: str):
+        self.repository.save(name)
