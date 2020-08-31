@@ -5,16 +5,16 @@ from pdv.config.default import Config
 from pdv.config.dependencies import DBEngine, Session
 from sqlalchemy import create_engine
 
-from pdv.domain.establishment_interface import EstablishmentInterface
-from pdv.domain.transaction_interface import TransactionInterface
-from pdv.repository.establishment_repository import EstablishmentRepository
-from pdv.repository.transaction_repository import TransactionRepository
+from pdv.domain.establishment_service_interface import EstablishmentServiceInterface
+from pdv.repository.establishment_repository import EstablishmentServiceRepository
+from pdv.domain.transaction_service_interface import TransactionServiceInterface
+from pdv.repository.transaction_repository import TransactionServiceRepository
 
 
 class DbModule(Module):
     def configure(self, binder):
-        binder.bind(EstablishmentInterface, to=EstablishmentRepository, scope=singleton)
-        binder.bind(TransactionInterface, to=TransactionRepository, scope=singleton)
+        binder.bind(EstablishmentServiceInterface, to=EstablishmentServiceRepository, scope=singleton)
+        binder.bind(TransactionServiceInterface, to=TransactionServiceRepository, scope=singleton)
 
     @provider
     @singleton

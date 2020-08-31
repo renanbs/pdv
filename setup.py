@@ -10,6 +10,8 @@ setup(name='pdv',
           'injector==0.16.0',
           'SQLAlchemy==1.3.19',
           'alembic==1.4.2',
+          'pycpfcnpj==1.5.1',
+          'marshmallow==3.7.1',
       ],
       extras_require={
           'dev': [
