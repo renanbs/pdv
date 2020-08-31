@@ -5,14 +5,16 @@ from flask import Blueprint, jsonify
 from injector import inject
 
 from pdv.config.dependencies import Application
-from pdv.repository.establishment_interface import EstablishmentInterface
-from pdv.repository.transaction_interface import TransactionInterface
+
+
+from pdv.domain.establishment_service import EstablishmentService
+from pdv.domain.transaction_interface import TransactionInterface
 
 
 class EstablishmentsEndpoint:
 
     @inject
-    def __init__(self, app: Application, ec: EstablishmentInterface, transaction_service: TransactionInterface):
+    def __init__(self, app: Application, ec: EstablishmentService, transaction_service: TransactionInterface):
         self.app = app
         self.ec = ec
         self.transaction_service = transaction_service
@@ -22,7 +24,7 @@ class EstablishmentsEndpoint:
 
         @self.app.route('/api/v1/estabelecimento', methods=['POST'])
         def add_establishments():
-            self.ec.create_establishment('my ec')
+            self.ec.save('my ec')
             self.transaction_service.create_transaction('my transaction')
 
             return jsonify({'aceito': True}), HTTPStatus.CREATED

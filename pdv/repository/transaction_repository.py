@@ -1,12 +1,12 @@
 from injector import inject
 
 from pdv.config.dependencies import Session
+from pdv.domain.transaction_interface import TransactionInterface
 
-from pdv.repository.transaction_interface import TransactionInterface
 from pdv.repository.transaction_model import Transaction
 
 
-class TransactionService(TransactionInterface):
+class TransactionRepository(TransactionInterface):
     @inject
     def __init__(self, session: Session):
         self.session = session
