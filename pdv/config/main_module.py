@@ -1,8 +1,9 @@
 from injector import Injector
 
 from pdv.config.app_module import AppModule
+from pdv.config.db_module import DbModule
 
-MODULES = [AppModule]
+MODULES = [DbModule, AppModule]
 
 
 def create_injector(modules):

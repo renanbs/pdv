@@ -8,6 +8,8 @@ setup(name='pdv',
       install_requires=[
           'Flask==1.1.2',
           'injector==0.16.0',
+          'SQLAlchemy==1.3.19',
+          'alembic==1.4.2',
       ],
       extras_require={
           'dev': [
