@@ -11,3 +11,6 @@ class TransactionService:
 
     def create_transaction(self, transaction: Transaction) -> None:
         self.repository.save(transaction)
+
+    def get_transactions_from_establishment_with_sum(self, cnpj):
+        return self.repository.get_transactions_from_establishment_with_sum(cnpj)

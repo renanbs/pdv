@@ -13,7 +13,7 @@ class TransactionSchema(Schema):
     cliente = fields.Str(validate=validate_cpf_cnpj)
     descricao = fields.Str()
     estabelecimento = fields.Str(validate=validate_cpf_cnpj)
-    valor = fields.Decimal()
+    valor = fields.Decimal(as_string=True)
 
     @post_load
     def make_transaction(self, data, **kwargs):

@@ -2,7 +2,8 @@ from pycpfcnpj import cpfcnpj
 from sqlalchemy import Column, String, Integer
 from sqlalchemy.ext.declarative import declarative_base
 
-from sqlalchemy.orm import validates, relationship
+from sqlalchemy.orm import validates
+
 
 Base = declarative_base()
 
@@ -15,7 +16,6 @@ class Establishment(Base):
     cnpj = Column(String(14), nullable=False, unique=True)
     dono = Column(String(50), nullable=False)
     telefone = Column(String(11), nullable=False)
-    # transacoes = relationship('Transaction', backref='estabelecimento', lazy=True)
 
     @validates('cnpj')
     def validate_cnpj(self, key, cnpj) -> str:

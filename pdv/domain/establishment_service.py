@@ -14,3 +14,6 @@ class EstablishmentService:
 
     def get_establishments(self):
         return self.repository.list()
+
+    def get_establishment(self, cnpj: str):
+        return self.repository.find_by_cnpj(cnpj)

@@ -5,16 +5,16 @@ from flask import Blueprint, jsonify, request
 from injector import inject
 
 from pdv.config.dependencies import Application
+from pdv.domain.transaction_helper import TransactionHelper
 from pdv.domain.transaction_schema import TransactionSchema
-from pdv.domain.transaction_service import TransactionService
 
 
 class TransactionsEndpoint:
 
     @inject
-    def __init__(self, app: Application, transaction_service: TransactionService):
+    def __init__(self, app: Application, transaction_helper: TransactionHelper):
         self.app = app
-        self.transaction_service = transaction_service
+        self.transaction_helper = transaction_helper
 
     def register_endpoints(self):
         app_bp = Blueprint('TransactionsApp', __name__)
@@ -22,11 +22,11 @@ class TransactionsEndpoint:
         @self.app.route('/api/v1/transacao', methods=['POST'])
         def add_transaction():
             transaction = TransactionSchema().load(data=request.get_json())
-            self.transaction_service.create_transaction(transaction)
+            self.transaction_helper.create_transaction(transaction)
             return jsonify({'aceito': True}), HTTPStatus.CREATED
 
         @self.app.route('/api/v1/transacoes/estabelecimento', methods=['GET'])
-        def get_transaction():
-            return jsonify({'aceito': True}), HTTPStatus.CREATED
+        def get_transactions():
+            return jsonify(self.transaction_helper.get_transactions_from_establishment('97064032000192')), HTTPStatus.OK
 
         return app_bp
