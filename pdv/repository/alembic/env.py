@@ -5,10 +5,11 @@ from sqlalchemy import pool
 
 from alembic import context
 
-# this is the Alembic Config object, which provides
-# access to the values within the .ini file in use.
 from pdv.repository.establishment_model import Establishment
 from pdv.repository.transaction_model import Transaction
+
+# this is the Alembic Config object, which provides
+# access to the values within the .ini file in use.
 
 config = context.config
 
