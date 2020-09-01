@@ -30,4 +30,3 @@ class TransactionServiceRepository(TransactionServiceInterface):
         transactions = self.session.query(Transaction).filter(Transaction.estabelecimento == cnpj).all()
         _sum = self.session.query(func.sum(Transaction.valor)).filter(Transaction.estabelecimento == cnpj).scalar()
         return transactions, _sum
-

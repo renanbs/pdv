@@ -27,7 +27,7 @@ class EstablishmentsEndpoint:
             try:
                 ec = EstablishmentSchema().load(data=request.get_json())
                 self.ec_service.create_establishment(ec)
-            except (RepositoryException, ValueError, ValidationError) as e:
+            except (RepositoryException, ValueError, ValidationError):
                 return jsonify({'aceito': False}), HTTPStatus.BAD_REQUEST
 
             return jsonify({'aceito': True}), HTTPStatus.CREATED

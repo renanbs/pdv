@@ -1,5 +1,6 @@
 from marshmallow import fields, Schema, post_load, ValidationError
 from pycpfcnpj import cpfcnpj
+from pycpfcnpj.compatible import clear_punctuation
 
 from pdv.repository.transaction_model import Transaction
 
@@ -17,8 +18,6 @@ class TransactionSchema(Schema):
 
     @post_load
     def make_transaction(self, data, **kwargs):
-        data['cliente'] = data['cliente'].replace('.', '').replace('/', '').replace('-', '')
-        data['estabelecimento'] = data['estabelecimento'].replace('.', '').replace('/', '').replace('-', '')
+        data['cliente'] = clear_punctuation(data['cliente'])
+        data['estabelecimento'] = clear_punctuation(data['estabelecimento'])
         return Transaction(**data)
-
-

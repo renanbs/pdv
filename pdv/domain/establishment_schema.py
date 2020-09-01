@@ -1,5 +1,6 @@
 from marshmallow import fields, Schema, post_load, ValidationError
 from pycpfcnpj import cpfcnpj
+from pycpfcnpj.compatible import clear_punctuation
 
 from pdv.repository.establishment_model import Establishment
 
@@ -17,7 +18,5 @@ class EstablishmentSchema(Schema):
 
     @post_load
     def make_establishment(self, data, **kwargs):
-        data['cnpj'] = data['cnpj'].replace('.', '').replace('/', '').replace('-', '')
+        data['cnpj'] = clear_punctuation(data['cnpj'])
         return Establishment(**data)
-
-
