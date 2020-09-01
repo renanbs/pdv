@@ -20,7 +20,13 @@ class EstablishmentServiceRepository(EstablishmentServiceInterface):
             raise RepositoryException(e)
 
     def find_by_cnpj(self, cnpj: str) -> Establishment:
-        return self.session.query(Establishment).filter(Establishment.cnpj == cnpj).one()
+        try:
+            return self.session.query(Establishment).filter(Establishment.cnpj == cnpj).one()
+        except Exception as e:
+            raise RepositoryException(e)
 
     def list(self) -> list:
-        return self.session.query(Establishment).all()
+        try:
+            return self.session.query(Establishment).all()
+        except Exception as e:
+            raise RepositoryException(e)

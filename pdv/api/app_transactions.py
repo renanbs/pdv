@@ -3,11 +3,13 @@ from http import HTTPStatus
 from flask import Blueprint, jsonify, request
 
 from injector import inject
+from marshmallow import ValidationError
 
 from pdv.api.serializer import Serializer, SerializerException
 from pdv.config.dependencies import Application
 from pdv.domain.transaction_helper import TransactionHelper
 from pdv.domain.transaction_schema import TransactionSchema
+from pdv.repository.exceptions import RepositoryException
 
 
 class TransactionsEndpoint:
@@ -22,9 +24,13 @@ class TransactionsEndpoint:
 
         @self.app.route('/api/v1/transacao', methods=['POST'])
         def add_transaction():
-            transaction = TransactionSchema().load(data=request.get_json())
-            self.transaction_helper.create_transaction(transaction)
-            return jsonify({'aceito': True}), HTTPStatus.CREATED
+            try:
+                transaction = TransactionSchema().load(data=request.get_json())
+                self.transaction_helper.create_transaction(transaction)
+            except (RepositoryException, ValueError, ValidationError):
+                return {'aceito': False}, HTTPStatus.BAD_REQUEST
+
+            return {'aceito': True}, HTTPStatus.CREATED
 
         @self.app.route('/api/v1/transacoes/estabelecimento', methods=['GET'])
         def get_transactions():
