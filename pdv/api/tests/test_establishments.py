@@ -15,7 +15,8 @@ def ec():
     }
 
 
-def test_should_get_establishments(api_client):
+def test_should_get_establishments(api_client, mocker):
+    mocker.patch('pdv.domain.establishment_service.EstablishmentService.get_establishments')
     response = api_client.get('/api/v1/estabelecimentos')
     assert response.status_code == HTTPStatus.OK
 

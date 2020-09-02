@@ -16,7 +16,7 @@ class TransactionHelper:
     def create_transaction(self, transaction: Transaction) -> None:
         self.transaction_service.create_transaction(transaction)
 
-    def get_transactions_from_establishment(self, cnpj) -> dict:
+    def get_transactions_from_establishment(self, cnpj: str) -> dict:
         ec = self.ec_service.get_establishment(cnpj)
         transactions, _sum = self.transaction_service.get_transactions_from_establishment_with_sum(cnpj)
         return {

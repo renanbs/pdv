@@ -11,3 +11,7 @@ class EstablishmentServiceInterface(ABC):
     @abstractmethod
     def list(self) -> list:
         pass
+
+    @abstractmethod
+    def find_by_cnpj(self, cnpj: str) -> Establishment:
+        pass

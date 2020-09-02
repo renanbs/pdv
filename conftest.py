@@ -2,25 +2,26 @@ from unittest.mock import MagicMock
 
 import pytest
 
-from injector import Injector, InstanceProvider
+from injector import Injector
 
+from pdv.config.dependencies import DBEngine, Session
 from pdv.config.main_module import MODULES
-from pdv.domain.establishment_service import EstablishmentService
-from pdv.repository.establishment_repository import EstablishmentServiceRepository
 
 
 @pytest.fixture
-def injector(establishment_service):
+def engine():
+    return MagicMock()
+
+
+@pytest.fixture
+def session():
+    return MagicMock()
+
+
+@pytest.fixture
+def injector(engine, session):
     injector = Injector(MODULES)
-    injector.binder.bind(EstablishmentService, to=InstanceProvider(establishment_service))
+    injector.binder.bind(DBEngine, to=engine)
+    injector.binder.bind(Session, to=session)
+
     yield injector
-
-
-@pytest.fixture
-def establishment_service(establishment_service_repository):
-    return EstablishmentService(establishment_service_repository)
-
-
-@pytest.fixture
-def establishment_service_repository():
-    return EstablishmentServiceRepository(MagicMock())
