@@ -11,10 +11,10 @@ setup-dev:
 	pip install -r requirements-dev.txt
 
 test:
-	pytest -v --cov=pdv --ignore=pdv/repository/alembic --cov-fail-under=90
+	pytest -v --cov=pdv --ignore=pdv/repository/alembic --cov-fail-under=80
 
 test-coverage:
-	pytest -v --cov=pdv --cov-report=term-missing --cov-report=html --ignore=pdv/repository/alembic --cov-fail-under=90
+	pytest -v --cov=pdv --cov-report=term-missing --cov-report=html --ignore=pdv/repository/alembic --cov-fail-under=80
 
 .create-venv:
 	pyenv install -s $(PYTHON_VERSION)
@@ -60,6 +60,9 @@ clean: .clean-build .clean-pyc .clean-test ## remove all build, test, coverage a
 all : setup-dev test-coverage code-convention
 
 default_target: code-convention test
+
+setup-db:
+	alembic upgrade head
 
 run:
 	flask run
