@@ -1,7 +1,7 @@
 # CODE REVIEW:  python 3 não precisa deste encode
 # -*- coding: utf-8 -*-
 
-# CODE REVIEW: remover imports não usados
+# CODE REVIEW: remover imports não usados (traceback, timedelta, timezone)
 import os, sys, traceback, logging, configparser
 import xlsxwriter
 from datetime import datetime, timedelta, timezone

@@ -5,6 +5,9 @@ This project consists in registering all payments made by customers to an establ
 The main idea of the architecture was based on the Clean Architecture, so I chose to follow the Hexagonal Architecture.  
 
  - It was only tested on Linux.
+ 
+The "Nosso Segundo Desafio" is in this link: https://github.com/renanbs/pdv/blob/master/code-review.py
+ 
 
 ## Requirements
 
