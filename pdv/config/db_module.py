@@ -19,7 +19,7 @@ class DbModule(Module):
     @provider
     @singleton
     def engine(self) -> DBEngine:
-        engine = create_engine(Config.DB_URL, echo=True)
+        engine = create_engine(Config.DB_URL, connect_args={'check_same_thread': False}, echo=True)
         engine.connect()
         return engine
 
