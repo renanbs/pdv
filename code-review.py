@@ -1,4 +1,7 @@
+# CODE REVIEW:  python 3 não precisa deste encode
 # -*- coding: utf-8 -*-
+
+# CODE REVIEW: remover imports não usados
 import os, sys, traceback, logging, configparser
 import xlsxwriter
 from datetime import datetime, timedelta, timezone
@@ -8,18 +11,23 @@ from flask_sqlalchemy import SQLAlchemy
 from logging.handlers import RotatingFileHandler
 
 
+# CODE REVIEW: remover argv se nao for usar os parametros de linha de comando
 def main(argv):
     greetings()
 
     print('Press Crtl+{0} to exit'.format('Break' if os.name == 'nt' else 'C'))
 
+    # CODE REVIEW: pra que precisa do flask se nao tem api?
     app = Flask(__name__)
+    # CODE REVIEW: Melhor setar o logger apropriadamente
     handler = RotatingFileHandler('bot.log', maxBytes=10000, backupCount=1)
     handler.setLevel(logging.INFO)
     app.logger.addHandler(handler)
+    # CODE REVIEW: Usar variaveis de ambiente pra não expor dados de segurança do banco
     app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://postgres:123mudar@127.0.0.1:5432/bot_db'
     db = SQLAlchemy(app)
     config = configparser.ConfigParser()
+    # CODE REVIEW: Lendo as configurações do projeto de um diretório temporário?
     config.read('/tmp/bot/settings/config.ini')
 
     var1 = int(config.get('scheduler','IntervalInMinutes'))
@@ -41,6 +49,7 @@ def greetings():
     print('             ##########################')
 
 
+# CODE REVIEW: dar um nome mais significativo, que indique o que a task está fazendo
 def task1(db):
     file_name = 'data_export_{0}.xlsx'.format(datetime.now().strftime("%Y%m%d%H%M%S"))
     file_path = os.path.join(os.path.curdir, file_name)
@@ -61,6 +70,7 @@ def task1(db):
     for order in orders:
         index = index + 1
 
+        # CODE REVIEW: pode remover todos os prints dentro deste loop
         print('Id: {0}'.format(order[0]))
         worksheet.write('A{0}'.format(index),order[0])
         print('Name: {0}'.format(order[1]))
@@ -68,6 +78,7 @@ def task1(db):
         print('Email: {0}'.format(order[2]))
         worksheet.write('C{0}'.format(index),order[2])
         print('Password: {0}'.format(order[3]))
+        # CODE REVIEW: remover print de dados sensiveis
         worksheet.write('D{0}'.format(index),order[3])
         print('Role Id: {0}'.format(order[4]))
         worksheet.write('E{0}'.format(index),order[4])
@@ -81,4 +92,5 @@ def task1(db):
 
 
 if __name__ == '__main__':
+    # CODE REVIEW: remover sys.argv se nao for usar os parametros de linha de comando
     main(sys.argv)
