@@ -51,7 +51,7 @@ $HOME/.pyenv/versions/$PROJECT_NAME-$PYTHON_VERSION/bin/python
 
 ### Run unit tests, style and convention
 
-- Tests will run with coverage minimum at 90%.
+- Tests will run with coverage minimum at 80%.
 
 Running code style
 ```bash
@@ -68,7 +68,9 @@ Running code style and all tests
 
 ## How to run this project
 
-There are 2 ways to run this project.
+There are some ways to run this project.
+
+> When you create virtual environment, you have those 3 options above:
 
 ```bash
 ➜ flask run
@@ -84,13 +86,26 @@ or
 ➜ make run
 ```
 
-This will start the server in your localhost using port 5000.
+> Or if you want, you can build a docker and run it:
+
+```bash
+➜ make build-docker
+➜ make run-docker
+```
+
+Both options will start the server in your localhost using port 5000.
 
 The server is accessible at the link below, despite there is no root endpoint:
 > http://127.0.0.1:5000/
 
-The only available endpoints are:
-- POST http://127.0.0.1:5000/
+The endpoints available are:
+
+- **POST** http://127.0.0.1:5000/api/v1/transacao
+- **GET** http://127.0.0.1:5000/api/v1/transacoes/estabelecimento
+
+> Extra endpoints
+- **POST** http://127.0.0.1:5000/api/v1/estabelecimento
+- **GET** http://127.0.0.1:5000/api/v1/estabelecimentos
 
 ---
 ## Usage examples

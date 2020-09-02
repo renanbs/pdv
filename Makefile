@@ -66,3 +66,9 @@ setup-db:
 
 run:
 	flask run
+
+build-docker:
+	docker build -t pdv .
+
+run-docker:
+	docker run --name my-pdv-server -p 5000:5000 pdv
