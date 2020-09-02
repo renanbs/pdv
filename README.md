@@ -112,4 +112,22 @@ The endpoints available are:
 
 ### cURL
 
+Create a establishment
+```bash
+➜ curl -X POST http://127.0.0.1:5000/api/v1/estabelecimento -d '{"nome": "Meu EC", "cnpj": "970.640.320001-92", "dono": "juca owner", "telefone": "51999999999"}' -H 'Content-Type: application/json'
+```
 
+Create a transaction with the establishment from the command above
+```bash
+➜ curl -X POST http://127.0.0.1:5000/api/v1/transacao -d '{"cliente": "48779229034", "estabelecimento": "970.640.320001-92", "valor": 10, "descricao": "my lunch"}' -H 'Content-Type: application/json'
+```
+
+List the transactions from a establishment
+```bash
+➜ curl http://127.0.0.1:5000/api/v1/transacoes/estabelecimento?cnpj=97064032000192 -H 'Content-Type: application/json'
+```
+
+List all establishments
+```bash
+➜ curl http://127.0.0.1:5000/api/v1/estabelecimentos -H 'Content-Type: application/json'
+```
