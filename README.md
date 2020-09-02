@@ -6,7 +6,7 @@ The main idea of the architecture was based on the Clean Architecture, so I chos
 
  - It was only tested on Linux.
  
-The "Nosso Segundo Desafio" is in this link: https://github.com/renanbs/pdv/blob/master/code-review.py
+**The "Nosso Segundo Desafio" is in this link: https://github.com/renanbs/pdv/blob/master/code-review.py**
  
 
 ## Requirements
