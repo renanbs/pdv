@@ -1,12 +1,12 @@
 from injector import inject
 
+from pdv.domain.establishment_service_interface import EstablishmentServiceInterface
 from pdv.repository.establishment_model import Establishment
-from pdv.repository.establishment_repository import EstablishmentServiceRepository
 
 
 class EstablishmentService:
     @inject
-    def __init__(self, repository: EstablishmentServiceRepository):
+    def __init__(self, repository: EstablishmentServiceInterface):
         self.repository = repository
 
     def create_establishment(self, establishment: Establishment) -> None:

@@ -1,12 +1,12 @@
 from injector import inject
 
+from pdv.domain.transaction_service_interface import TransactionServiceInterface
 from pdv.repository.transaction_model import Transaction
-from pdv.repository.transaction_repository import TransactionServiceRepository
 
 
 class TransactionService:
     @inject
-    def __init__(self, repository: TransactionServiceRepository):
+    def __init__(self, repository: TransactionServiceInterface):
         self.repository = repository
 
     def create_transaction(self, transaction: Transaction) -> None:
